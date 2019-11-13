@@ -1,8 +1,9 @@
 h1 Bienvenidos
-input(type="text", name="usern", required, placeholder="Username" )
-br
-input(type="password", name="password", required, placeholder="Password" )
-br
-input(type="submit" value="Log In")
-div(class="error")
-    p Contrasena o usuario no es correcto
+form(action="/login", method="post")
+    div(class="usuario_erroneo", display="visibility: none")
+        p Contraseña o usuario no es correcto
+    input(type="text", name="usern", required, placeholder="Username" )
+    br
+    input(type="password", name="password", required, placeholder="Password" )
+    br
+    input(type="submit" value="Log In")
