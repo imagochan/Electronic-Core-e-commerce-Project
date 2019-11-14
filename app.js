@@ -7,6 +7,16 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+var signupRouter = require('./routes/signup');
+
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb+srv://Miguel:Mmongo909192939495@cluster0-sicrg.mongodb.net/test?retryWrites=true&w=majority',{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(()=> {
+  console.log("Connected to database");
+});
 
 var app = express();
 
@@ -23,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
