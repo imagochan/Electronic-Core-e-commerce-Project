@@ -6,7 +6,7 @@ router.get('/', function (req, res, next) {
   res.render('login', { title: 'Express' });
 });
 
-router.post('/login', function (req, res, next) {
+router.post('/', function (req, res, next) {
 /*  if (req == 'login')
     res.render('index', { title: 'Express' });
   else if (req == 'signup')

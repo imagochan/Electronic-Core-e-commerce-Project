@@ -1,12 +1,15 @@
+head
+    title Login
+    script(src="javascripts/main.js")
 h1 Bienvenidos
-form(action="login", method="post")
+form(action="", method="post")
     div(class="usuario_erroneo", display="visibility: none")
         p Contraseña o usuario no es correcto
     input(type="text", name="usern", required, placeholder="Username" )
     br
     input(type="password", name="password", required, placeholder="Password" )
     br
-    input(type="submit" value="login" formaction="/login")
+    input(id="login_btn" type="submit" value="login" formaction="")
     br
     br
-    input(type="submit" value="signup" formaction="/signup")
+    input(id="login_btn" type="submit" value="signup" formaction="/login/signup")
