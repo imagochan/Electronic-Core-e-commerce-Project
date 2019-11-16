@@ -1,7 +1,7 @@
 const User = require('../../models/Usuario');
 var debug = require('debug')('proyectoWeb:user_controller');
 
-module.exports.getone = (req,res,next) => {
+module.exports.getOne = (req,res,next) => {
     debug("Search User", req.params);
     User.findOne({
         username: req.params.username
@@ -37,19 +37,36 @@ module.exports.getAll = (req,res,next) => {
         })
 }
 
+module.exports.register = (req,res,next) => {
+    debug("User", {body : req.body});
+    User.findOne({
+        username : req.body.username
+    }, "-password -login_count")
+    .then((foundUser) => {
+        if(foundUser){
+            debug("Ususario duplicado");
+            throw new Error(`Usuario duplicado ${req.body.username}`);
+        }
+        else
+            let newUser = new User({
+                username: req.body.username,
+                password: req.body.password,
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                direccion: req.body.direccion,
+                telefono: req.body.telefono,
+                numero_tarjeta_credito: req.body.numero_tarjeta_credito
+            });
+            return newUser.save();
+    }).then(user => {
+        return res
+                .header('Location', '/users/' + user.id)
+                .status(201)
+                .json({
+                    _id : user._id
+                });
 
-
-module.exports.create = (req, res) => {
-    let insertUser = new User({
-        username: req.body.username,
-        password: req.body.password,
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-        direccion: req.body.direccion,
-        telefono: req.body.telefono,
-        numero_tarjeta_credito: req.body.numero_tarjeta_credito
-    });
-
-    insertUser.save().then((newUser) => { res.status(200).json(insertUser) }).catch((err) => { res.status(500).json(err); })
-
+    }).catch(err =>{
+        next(err);
+    })
 }
