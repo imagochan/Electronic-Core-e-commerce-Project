@@ -16,8 +16,15 @@ mongoose.connect('mongodb+srv://Miguel:Mmongo909192939495@cluster0-sicrg.mongodb
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(()=> {
-  console.log("Connected to database");
+  console.log("Connected to my database");
 });
+
+/*mongoose.connect('mongodb+srv://junovicz:yasemeolvido@nocturnecluster-9fgvr.mongodb.net/test?retryWrites=true&w=majority',{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(()=> {
+  console.log("Connected to julio database");
+});*/
 
 var app = express();
 
@@ -34,7 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/index', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', loginRouter);
-app.use('/signup', signupRouter);
+app.use('/login/signup', signupRouter);
 app.use('/generic', genericRouter);
 
 // catch 404 and forward to error handler
