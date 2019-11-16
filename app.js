@@ -12,7 +12,7 @@ var userRouter = require('./routes/user');
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://Miguel:Mmongo909192939495@cluster0-sicrg.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://Miguel:Mmongo909192939495@cluster0-sicrg.mongodb.net/Prueba?retryWrites=true&w=majority',{
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(()=> {

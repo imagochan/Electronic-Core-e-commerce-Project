@@ -47,7 +47,7 @@ module.exports.register = (req,res,next) => {
             debug("Ususario duplicado");
             throw new Error(`Usuario duplicado ${req.body.username}`);
         }
-        else
+        else{
             let newUser = new User({
                 username: req.body.username,
                 password: req.body.password,
@@ -58,6 +58,7 @@ module.exports.register = (req,res,next) => {
                 numero_tarjeta_credito: req.body.numero_tarjeta_credito
             });
             return newUser.save();
+        }
     }).then(user => {
         return res
                 .header('Location', '/users/' + user.id)

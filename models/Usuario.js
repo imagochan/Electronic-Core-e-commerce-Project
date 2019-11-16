@@ -9,6 +9,6 @@ var schema =  new Schema({
     direccion: String,
     telefono: String,
     numero_tarjeta_credito: String
-});
+}, {collection: 'Usuario'});
 
-module.exports = mongoose.model('Cliente',schema);
+module.exports = mongoose.model('Usuario',schema);
