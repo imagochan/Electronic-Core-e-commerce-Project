@@ -11,13 +11,14 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/',function (req, res, next) {
-  console.log("hola");
+  console.log(req.body.username);
+  userController.Login(req,res,next);
   
   /*fetch('/user.json')
   .then(response => response.json())
   .then((response) => console.log(response));*/
 
-  res.render('index', { title: 'Express' });
+  //res.render('index', { title: 'Express' });
 });
 
 router.post('/signup', function (req, res, next) {

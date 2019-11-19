@@ -59,17 +59,17 @@ module.exports.getAll = (req,res,next) => {
 
 module.exports.Login = (req,res,next) => {
     debug("Search Username", req.params);
-    console.log(req.params.username);
-    console.log(req.params.password);
+    console.log(req.body.username);
+    console.log(req.body.password);
     User.findOne({
-        username: req.params.username,
-        password: req.params.password
+        username: req.body.username,
+        password: req.body.password
     } , "-login_count")
     .then((foundUser)=>{
         if(foundUser)
-            return true;
+            res.redirect('/index');
         else
-            return false;
+            res.redirect('/');
     });
 }
 
