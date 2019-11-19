@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
-var genericRouter = require('./routes/generic');
+var genericRouter = require('./routes/products');
 var userRouter = require('./routes/user');
 
 const mongoose = require('mongoose');
