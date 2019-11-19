@@ -9,16 +9,15 @@ router.get('/', function (req, res, next) {
   res.render('login', { title: 'Express' });
 });
 
-router.post('/', function (req, res, next) {
-  console.log(req.body.username);
-  User = userController.getAllLogin();
-  var found = userController.getAllLogin;
-  console.log(User);
 
-  if(1==1)
-    res.render('index', { title: 'Express' });
-  else
-    res.json("error");
+router.post('/',function (req, res, next) {
+  console.log("hola");
+  
+  /*fetch('/user.json')
+  .then(response => response.json())
+  .then((response) => console.log(response));*/
+
+  res.render('index', { title: 'Express' });
 });
 
 router.post('/signup', function (req, res, next) {

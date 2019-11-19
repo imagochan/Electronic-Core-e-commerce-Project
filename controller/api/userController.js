@@ -57,23 +57,20 @@ module.exports.getAll = (req,res,next) => {
         })
 }
 
-module.exports.getAllLogin = (req,res,next) => {
-    var perPage = Number(req.query.size) || 10,
-        page = req.query.page > 0 ? req.query.page : 0;
-    var sortProperty = req.query.sortby || "createdAt",
-        sort = req.query.sort || "desc";
-
-    debug("User List", {size: perPage, page, sortby:sortProperty,sort});
-
-    User.find({}, "-password -login_count -__v")
-        .limit(perPage)
-        .skip(perPage*page)
-        .sort({ [sortProperty]: sort})
-        .then((users) => {
-            return res.status(200).json(users);
-        }).catch(err=>{
-            next(err);
-        })
+module.exports.Login = (req,res,next) => {
+    debug("Search Username", req.params);
+    console.log(req.params.username);
+    console.log(req.params.password);
+    User.findOne({
+        username: req.params.username,
+        password: req.params.password
+    } , "-login_count")
+    .then((foundUser)=>{
+        if(foundUser)
+            return true;
+        else
+            return false;
+    });
 }
 
 module.exports.register = (req,res,next) => {

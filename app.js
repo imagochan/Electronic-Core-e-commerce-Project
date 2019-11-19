@@ -14,7 +14,8 @@ const mongoose = require('mongoose');
 
 mongoose.connect('mongodb+srv://Miguel:Mmongo909192939495@cluster0-sicrg.mongodb.net/Prueba?retryWrites=true&w=majority',{
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 }).then(()=> {
   console.log("Connected to my database");
 });
