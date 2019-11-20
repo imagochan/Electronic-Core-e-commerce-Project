@@ -67,11 +67,28 @@ module.exports.Login = (req,res,next) => {
     } , "-login_count")
     .then((foundUser)=>{
         if(foundUser)
+        res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
+//            res.redirect('/index');
+        else
+            res.redirect('/');
+    });
+}
+
+module.exports.Logged = (req,res,next) => {
+    debug("Search Username", req.params);
+    console.log(req.body.username);
+    User.findOne({
+        _id: req.body._id,
+        username: req.body.username
+    } , "-password -login_count")
+    .then((foundUser)=>{
+        if(foundUser)
             res.redirect('/index');
         else
             res.redirect('/');
     });
 }
+
 
 module.exports.register = (req,res,next) => {
     debug("User", {body : req.body});
