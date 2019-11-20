@@ -80,7 +80,7 @@ module.exports.register = (req,res,next) => {
     }, "-password -login_count")
     .then((foundUser) => {
         if(foundUser){
-            debug("Ususario duplicado");
+            debug("Usuario duplicado");
             throw new Error(`Usuario duplicado ${req.body.username}`);
         }
         else{
@@ -104,6 +104,39 @@ module.exports.register = (req,res,next) => {
                 });
 
     }).catch(err =>{
+        next(err);
+    })
+}
+
+module.exports.updateUser = (req,res,next) => {
+    let update = {
+        username: req.params.username,
+        ...req.body
+    };
+
+    User.findOneAndUpdate({
+        username: req.params.username
+    }, update, {
+        new: true
+    })
+    .then((updated) => {
+        if(updated)
+            return res.status(200).json(updated);
+        else
+            return res.status(400).json(error);
+    })
+}
+
+module.exports.deleteUser = (req,res,next) => {
+    debug("Delete user", {
+        username: req.params.username,
+    });
+
+    User.findOneAndDelete({username: req.params.username})
+    .then((data) =>{
+        if (data) res.status(200).json(data);
+        else res.status(404).send();
+    }).catch( err => {
         next(err);
     })
 }

@@ -4,7 +4,7 @@ var debug = require('debug')('proyectoWeb:user_controller');
 module.exports.getOneProduct = (req,res,next) => {
     debug("Search product", req.params);
     Product.findOne({
-        nombre: {type:String, unique: true},
+        nombre: req.body.nombre
     })
     .then((foundProduct) => {
         if(foundProduct)
@@ -95,7 +95,7 @@ module.exports.restock = (req,res,next) => {
     });
 }
 
-module.exports.delteProduct = (req,res,next) => {
+module.exports.deleteProduct = (req,res,next) => {
     Product.findOneAndDelete({nombre: req.body.nombre})
     .then((data) => {
         if(data)
