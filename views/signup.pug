@@ -1,10 +1,10 @@
 h1 Sign up
 form(action="" , method="post")
     label Nombres:
-    input(id="NomU" type="text", name="nomu", required)
+    input(id="NomU" type="text", name="nombre", required)
     br
     label Apellidos:
-    input(id="LastU" type="text", name="lastu", required )
+    input(id="LastU" type="text", name="apellido", required )
     br
     label Username
     input(id="username" type="text", name="username", required, placeholder="user123" )
@@ -14,12 +14,12 @@ form(action="" , method="post")
     input(type="password", name="password", required, placeholder="Password" )
     br
     label Direccion:
-    input(id="Dic" type="text", name="dic", required, placeholder="Calle*** casa***" )
+    input(id="Dic" type="text", name="direccion", required, placeholder="Calle*** casa***" )
     br
     label Telefono:
-    input(id="TelU" type="text", name="TelU", required)
+    input(id="TelU" type="text", name="telefono", required)
     br 
     label Tarjeta de credito:
-    input(id="Tarjeta" type="text", name="Tarjeta", required, placeholder="1234********" )
+    input(id="Tarjeta" type="text", name="numero_tarjeta_credito", required, placeholder="1234********" )
     br
     input(id="login_btn" type="submit" value="signup" formaction="/login/signup")
