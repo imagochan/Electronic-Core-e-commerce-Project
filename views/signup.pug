@@ -1,26 +1,25 @@
 h1 Sign up
-label Nombres:
-input(id="NomU" type="text", name="nomu", required)
-br
-label Apellidos:
-input(id="LastU" type="text", name="lastu", required )
-br
-label Username
-input(id="username" type="text", name="username", required, placeholder="user123" )
-p Usuario ya existe, pruebe con otro otra vez.
-br
-label Password
-input(type="password", name="password", required, placeholder="Password" )
-br
-label Direccion:
-input(id="Dic" type="text", name="dic", required, placeholder="Calle*** casa***" )
-br
-label Telefono:
-input(id="TelU" type="text", name="TelU", required)
-br 
-label Tarjeta de credito:
-input(id="Tarjeta" type="text", name="Tarjeta", required, placeholder="1234********" )
-br
-input(id="login_btn" type="submit" value="signup" formaction="/signup")
-
-
+form(action="" , method="post")
+    label Nombres:
+    input(id="NomU" type="text", name="nomu", required)
+    br
+    label Apellidos:
+    input(id="LastU" type="text", name="lastu", required )
+    br
+    label Username
+    input(id="username" type="text", name="username", required, placeholder="user123" )
+    p Usuario ya existe, pruebe con otro otra vez.
+    br
+    label Password
+    input(type="password", name="password", required, placeholder="Password" )
+    br
+    label Direccion:
+    input(id="Dic" type="text", name="dic", required, placeholder="Calle*** casa***" )
+    br
+    label Telefono:
+    input(id="TelU" type="text", name="TelU", required)
+    br 
+    label Tarjeta de credito:
+    input(id="Tarjeta" type="text", name="Tarjeta", required, placeholder="1234********" )
+    br
+    input(id="login_btn" type="submit" value="signup" formaction="/login/signup")
