@@ -5,7 +5,7 @@ var schema =  new Schema({
     nombre: {type: String, unique: true},
     precio: Number,
     cantidad: Number,
-    tiempo_entrega: Date,
+    tiempo_entrega: Number,
     descripcion: String
 });
 

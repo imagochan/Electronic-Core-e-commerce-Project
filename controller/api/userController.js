@@ -59,16 +59,20 @@ module.exports.getAll = (req,res,next) => {
 
 module.exports.Login = (req,res,next) => {
     debug("Search Username", req.params);
-    console.log(req.body.username);
-    console.log(req.body.password);
+//    console.log(req.body.username);
+//    console.log(req.body.password);
     User.findOne({
         username: req.body.username,
         password: req.body.password
     } , "-login_count")
     .then((foundUser)=>{
-        if(foundUser)
-        res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
+        if(foundUser){
+//            loggedUserId = foundUser._id;
+//            loggedUserName = foundUser.username;
+//            return res.json({userId: foundUser._id, username: foundUser.username});
+            res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
 //            res.redirect('/index');
+        }
         else
             res.redirect('/');
     });

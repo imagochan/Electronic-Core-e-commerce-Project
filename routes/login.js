@@ -10,8 +10,14 @@ router.get('/', function (req, res, next) {
 
 
 router.post('/',function (req, res, next) {
-  console.log(req.body.username);
   userController.Login(req,res,next);
+//  var foundUser = userController.Login(req,res,next);
+/*  if(foundUser){
+    res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username})
+  }else{
+    console.log("notFound");
+    res.redirect('/');
+  }*/
   
 });
 
