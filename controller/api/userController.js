@@ -67,9 +67,10 @@ module.exports.Login = (req,res,next) => {
     } , "-login_count")
     .then((foundUser)=>{
         if(foundUser){
+//            console.log(foundUser);
 //            return res.json({userId: foundUser._id, username: foundUser.username});
-//            res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
-            res.redirect('/index');
+            res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
+//            res.redirect('/index');
         }
         else
             res.redirect('/');
