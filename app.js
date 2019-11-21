@@ -9,6 +9,7 @@ var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
 var genericRouter = require('./routes/products');
 var userRouter = require('./routes/user');
+var principalRouter = require('./routes/products')
 
 const mongoose = require('mongoose');
 
@@ -44,6 +45,7 @@ app.use('/', loginRouter);
 app.use('/login/signup', signupRouter);
 app.use('/generic', genericRouter);
 app.use('/user', userRouter);
+app.use('/principal', principalRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
