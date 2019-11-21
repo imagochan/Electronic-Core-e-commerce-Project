@@ -4,7 +4,7 @@ var debug = require('debug')('proyectoWeb:user_product_controller');
 
 module.exports.LoadIndex = async (req,res,next) => {
     var usuarioLogged;
-    var productos;
+    var productos = [];
     await User.findOne({
         username: req.body.username,
         password: req.body.password
@@ -31,9 +31,8 @@ module.exports.LoadIndex = async (req,res,next) => {
         .sort({ [sortProperty]: sort})
         .then((product) => {
             console.log(usuarioLogged);
-            console.log(productos);
-            productos = product;
-            res.render('index', {title: 'Index', usuario: usuarioLogged, productos: productos});
+            console.log(product);
+            res.render('index', {title: 'Index', usuario: usuarioLogged, productos: product});
 //           return res.status(200).json(product)
         }).catch(err => {
             next(err);

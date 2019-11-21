@@ -4,11 +4,12 @@ div(id="main")
             h1= `Welcome ${usuario.username} to Electronic core`
             p This is the site to use for ordering electronic devices and appliances for purchase and delivery. As a client you have access to all of the following products.
         section(class="tiles" id="section")
-            article(class="style1")
-                span(class="image")
-                    img(src="images/pic01.jpg", alt="")
-                a(href="principal")
-                    h2= productos[0].nombre
-                    div(class="content")
-                        p Sed nisl arcu euismod sit amet nisi lorem etiam dolor veroeros et feugiat.
+            each producto in productos
+                article(class="style1")
+                    span(class="image")
+                        img(src="images/pic01.jpg", alt="")
+                    a(href="principal")
+                        h2= producto.nombre
+                        div(class="content")
+                            p= producto.descripcion
                     
