@@ -91,11 +91,10 @@ module.exports.Logged = (req,res,next) => {
 
 
 module.exports.register = (req,res,next) => {
-    console.log("se ejecuto el boton signup del form"+ req.body.username);
     debug("User", {body : req.body});
     User.findOne({
         username : req.body.username
-    }, "-password -login_count")
+    }, "-password")
     .then((foundUser) => {
         if(foundUser){
             debug("Usuario duplicado");
