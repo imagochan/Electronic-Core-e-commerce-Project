@@ -83,7 +83,7 @@ module.exports.Logged = (req,res,next) => {
     User.findOne({
         _id: req.body._id,
         username: req.body.username
-    } , "-password -login_count")
+    } , "-password")
     .then((foundUser)=>{
         if(foundUser)
             res.redirect('/index');

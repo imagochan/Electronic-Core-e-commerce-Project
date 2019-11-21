@@ -37,12 +37,5 @@ module.exports.LoadIndex = async (req,res,next) => {
         }).catch(err => {
             next(err);
         })
-
-/*    if(productos != undefined && usuarioLogged != undefined){
-        console.log("Hello");
-        res.render('index', {title: 'Index', usuario: usuarioLogged, productos: product});
-    }else{
-        console.log("Hello");
-        res.json("error");
-    }*/
 }
+
