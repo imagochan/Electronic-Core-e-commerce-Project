@@ -3,8 +3,8 @@ const mongoose = require('mongoose'),
 
 var schema =  new Schema({
     nombre: {type: String, unique: true},
-    precio: Double,
-    cantidad: Integer,
+    precio: Number,
+    cantidad: Number,
     tiempo_entrega: Date,
     descripcion: String
 });

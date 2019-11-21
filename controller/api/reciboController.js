@@ -8,8 +8,10 @@ module.exports.getOne = (req,res,next) => {
         usuarioId: req.body.usuarioId
     })
     .then((foundRecibo) => {
-        if(foundRecibo)
+        if(foundRecibo){
+            console.log("found");
             return res.status(200).json(foundRecibo);
+        }
         else
             return res.status(400).json(error);
     })
@@ -39,9 +41,11 @@ module.exports.makeRecibo = (req,res,next) => {
             return newRecibo.save();
         }
     }).then(recibo => {
+        console.log("made recibo");
         return res
                 .header('Location', '/recibo/' + recibo._id)
-                .status(201);
+                .status(201)
+                .json("success");
     }).catch(err => {
         next(err);
     })
