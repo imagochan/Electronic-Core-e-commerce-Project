@@ -5,7 +5,7 @@ DECLARE
 BEGIN
     IF TG_RELNAME = 'cliente' THEN
         SELECT INTO prueba_admin * FROM admin 
-        WHERE correo_institucional=NEW.correo_institucional;
+        WHERE email=NEW.correo_institucional;
 
         IF (
             prueba_admin.correo_institucional IS NOT NULL
@@ -14,7 +14,7 @@ BEGIN
         END IF;
     ELSE -- comprobacion de admin
         SELECT INTO prueba_cliente * FROM cliente 
-        WHERE email=NEW.email
+        WHERE email=NEW.correo_institucional
 
         IF (
             prueba_cliente.email IS NOT NULL
