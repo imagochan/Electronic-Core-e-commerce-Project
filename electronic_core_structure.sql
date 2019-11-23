@@ -1,5 +1,5 @@
 create table usuario(
-    id_usuario integer unique not null,
+    id_usuario serial,
     username text not null,
     password text not null,
     constraint pk_usuario primary key (id_usuario));
@@ -11,7 +11,7 @@ create table admin(
     telefono varchar(9) not null,
     correo_institucional text not null,
     constraint pk_admin primary key (id_usuario)
-)
+) INHERITS (usuario)
 
 create table cliente(
     nombre varchar(100) not null,
@@ -24,7 +24,7 @@ create table cliente(
 ) INHERITS (usuario)
 
 create table producto(
-    id_producto integer unique not null, 
+    id_producto serial, 
     nombre text not null,
     descripcion text not null,
     precio money not null,
@@ -34,7 +34,7 @@ create table producto(
 )
 
 create table recibo(
-    id_recibo integer unique not null,
+    id_recibo serial,
     id_producto integer unique not null,
     id_usuario integer unique not null,
     fecha_compra date not null,
@@ -44,8 +44,8 @@ create table recibo(
 )
 
 create table transportista(
-    DUI	char(10) not null,
-    NIT char(17) not null,
+    DUI	char(10) unique not null,
+    NIT char(17) unique not null,
     vehiculo_asignado text,
     constraint pk_transportista primary key (DUI)
 )
