@@ -2,7 +2,7 @@ create table usuario(
     id_usuario serial,
     username text not null,
     password text not null,
-    constraint pk_usuario primary key (id_usuario));
+    constraint pk_usuario primary key (id_usuario)
 )
 
 create table admin(
@@ -29,7 +29,7 @@ create table producto(
     descripcion text not null,
     precio numeric not null,
     cantidad integer not null,
-    imagen_url url varchar(150),
+    imagen_url varchar(150),
     constraint pk_producto primary key (id_producto)
 )
 
@@ -38,8 +38,8 @@ create table recibo(
     id_producto integer unique not null,
     id_usuario integer unique not null,
     fecha_compra date not null,
-    constraint pk_recibo primary key (id_recibo)
-    constraint fk_cliente foreign key (id_usuario) references usuario(id_usuario)
+    constraint pk_recibo primary key (id_recibo),
+    constraint fk_cliente foreign key (id_usuario) references usuario(id_usuario),
     constraint fk_producto foreign key (id_producto) references producto(id_producto)
 )
 
