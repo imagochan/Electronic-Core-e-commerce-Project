@@ -29,6 +29,7 @@ create table producto(
     descripcion text not null,
     precio money not null,
     cantidad integer not null,
+    imagen_url url varchar(150),
     constraint pk_producto primary key (id_producto)
 )
 
