@@ -5,21 +5,21 @@ DECLARE
 BEGIN
     IF TG_RELNAME = 'cliente' THEN
         SELECT INTO prueba_admin * FROM admin 
-        WHERE id_usuario=NEW.id_usuario;
+        WHERE correo_institucional=NEW.correo_institucional;
 
         IF (
-            prueba_admin.id_usuario IS NOT NULL
+            prueba_admin.correo_institucional IS NOT NULL
         ) THEN
-            RAISE EXCEPTION 'El usuario % ya es un admin', NEW.id_usuario;
+            RAISE EXCEPTION 'El usuario con correo % ya es un admin', NEW.correo_institucional;
         END IF;
     ELSE -- comprobacion de admin
         SELECT INTO prueba_cliente * FROM cliente 
-        WHERE id_usuario=NEW.id_usuario
+        WHERE email=NEW.email
 
         IF (
-            prueba_cliente.id_usuario IS NOT NULL
+            prueba_cliente.email IS NOT NULL
         ) THEN
-            RAISE EXCEPTION 'El usuario % ya es un cliente', NEW.id_usuario;
+            RAISE EXCEPTION 'El usuario con correo % ya es un cliente', NEW.email;
         END IF;
     END IF;
     RETURN NEW;
