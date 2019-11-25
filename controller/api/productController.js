@@ -57,7 +57,7 @@ module.exports.addProduct = (req,res,next) => {
         }
     }).then(producto => { // Con el usario almacenado retornamos que ha sido creado con exito
         return res
-            .header('Location', '/product/' + producto._id)
+            .header('Location', '/producto/' + producto._id)
             .status(201)
             .json({
                 nombre: producto.nombre

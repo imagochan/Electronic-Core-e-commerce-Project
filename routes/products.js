@@ -1,16 +1,17 @@
 var express = require('express');
 var router = express.Router();
+var productController = require("../controller/api/productController");
 
-/* GET home page. */
+router.get('/nuevoproducto',function(req,res,next){
+  res.render('nuevoproductoform', { title: 'Express' });
+})
 
-router.get('/comprar/:nombre/:producto',function(req,res,next){
-  var data = {
-    user: req.params.nombre,
-    producto: req.params.producto
-  };
+router.get('/:_id',function(req,res,next){
+  productController.getOneProduct(req,res,next);
+})
 
-  console.log("user " + data.user + " producto " + data.producto);
-  
+router.post('/nuevoproducto',function(req,res,next){
+  productController.addProduct(req,res,next);
 })
 
 /*router.get('/', function(req, res, next) {

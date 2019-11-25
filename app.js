@@ -46,7 +46,7 @@ app.use('/index', indexRouter);
 app.use('/', loginRouter);
 app.use('/login/signup', signupRouter);
 app.use('/user', userRouter);
-//app.use('/comprar', productRouter);
+app.use('/producto', productRouter);
 app.use('/recibo', reciboRouter);
 
 // catch 404 and forward to error handler
