@@ -1,10 +1,16 @@
-a(href="index") Regresar
-h1#NombreP
-h2#PrecioP
-p#DescP
-label#TiempoE
-label Cantidad
-input(id="Can" type="integer",placeholder="0-5" )
-p= usuario.username
-p= productos.nombre
-p= productos.precio
+div(id=producto)
+    form(action="" , method="post")
+        img(src="", alt="")
+        h1= producto.nombre
+        h2= producto.precio
+        img(src="producto.imagen_url", alt="Foto del producto")
+        p= producto.descripcion
+        p Tiempo de entrega esperado:
+        label=producto.tiempo_entrega
+        br
+        label Stock:
+        label= producto.cantidad
+        br
+        input(type="submit", value="Ordenar")
+        br
+        input(type="submit", formaction="/index")

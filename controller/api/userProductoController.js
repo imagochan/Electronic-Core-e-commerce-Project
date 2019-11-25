@@ -55,7 +55,7 @@ module.exports.Comprar = async (req,res,next) => {
         nombre: req.params.nombre
     })
     .then((product)=>{
-        res.render('product', {title: 'Index', usuario: userLogged, productos: product});
+        res.render('product', {title: 'Index', usuario: userLogged, producto: product});
     });
 
 
