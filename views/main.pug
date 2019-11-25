@@ -7,7 +7,7 @@ div(id="main")
             each producto in productos
                 article(class="style1")
                     span(class="image")
-                        img(src="images/pic01.jpg", alt="")
+                        img(src=producto.imagen_url, alt="producto_imagen")
                     a(href=`/index/${usuario.username}/${producto.nombre}`)
                         h2= producto.nombre
                         div(class="content")

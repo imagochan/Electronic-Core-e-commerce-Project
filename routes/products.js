@@ -14,6 +14,16 @@ router.post('/nuevoproducto',function(req,res,next){
   productController.addProduct(req,res,next);
 })
 
+/* UPDATE one page. */
+router.get('/update/:nombre', function(req, res, next) {
+  productController.update(req,res,next);
+});
+
+/* UPDATE one page. part2 */
+router.post('/update/:nombre', function(req, res, next) {
+  productController.update2(req,res,next);
+});
+
 /*router.get('/', function(req, res, next) {
   res.render('principal', { title: 'Express' });
 });*/

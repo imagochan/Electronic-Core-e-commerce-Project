@@ -1,0 +1,21 @@
+h1 Actualizar Producto
+form(action=`/producto/update/${mivariable.nombre}` , method="post")
+    label Nombre:
+    input(id="name" type="text", value=mivariable.nombre, name="nombre", required)
+    br
+    label Precio:
+    input(id="price" type="text", value=mivariable.precio, name="precio", required)
+    br
+    label Cantidad:
+    input(id="quantity" type="text", value=mivariable.cantidad, name="cantidad", required )
+    br
+    label Tiempo de Entrega
+    input(id="delivery_time" type="text", value=mivariable.tiempo_entrega, name="tiempo_entrega", required )
+    br
+    label Descripcion
+    input(id="description", type="text", value=mivariable.descripcion, name="descripcion" required )
+    br
+    label URL de la Imagen del Producto
+    input(id="image_url", type="text", value=mivariable.imagen_url, name="imagen_url" required )
+    br
+    input(id="submit_btn" type="submit" value="Actualizar Proucto" formaction="")

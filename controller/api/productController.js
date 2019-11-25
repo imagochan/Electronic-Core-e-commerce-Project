@@ -1,9 +1,9 @@
-const Product = require('../../models/Producto');
+const Producto = require('../../models/Producto');
 var debug = require('debug')('proyectoWeb:user_controller');
 
 module.exports.getOneProduct = (req,res,next) => {
     debug("Search product", req.params);
-    Product.findOne({
+    Producto.findOne({
         nombre: req.body.nombre
     })
     .then((foundProduct) => {
@@ -26,7 +26,7 @@ module.exports.getProducts = (req,res,next) => {
 
     debug("Usert List",{size:perPage,page, sortby:sortProperty,sort});
 
-    Product.find({})
+    Producto.find({})
         .limit(perPage)
         .skip(perPage * page)
         .sort({ [sortProperty]: sort})
@@ -38,7 +38,7 @@ module.exports.getProducts = (req,res,next) => {
 }
 
 module.exports.addProduct = (req,res,next) => {
-    Product.findOne({
+    Producto.findOne({
         nombre: req.body.nombre
     })
     .then((foundProduct) => {
@@ -46,14 +46,15 @@ module.exports.addProduct = (req,res,next) => {
             debug("Producto ya existe");
             throw new Error(`Producto ya existe ${req.body.nombre}`);
         } else {
-            let newProduct = new Product({
+            let newProducto = new Producto({
                 nombre: req.body.nombre,
                 precio: req.body.precio,
                 cantidad: req.body.cantidad,
                 tiempo_entrega: req.body.tiempo_entrega,
-                descripcion: req.body.descripcion
+                descripcion: req.body.descripcion,
+                imagen_url: req.body.imagen_url
             });
-            return newProduct.save(); // Retornamos la promesa para poder concater una sola linea de then
+            return newProducto.save(); // Retornamos la promesa para poder concater una sola linea de then
         }
     }).then(producto => { // Con el usario almacenado retornamos que ha sido creado con exito
         return res
@@ -80,7 +81,7 @@ module.exports.restock = (req,res,next) => {
         descripcion: req.body.descripcion
     };
 
-    Product.findOneAndUpdate({
+    Producto.findOneAndUpdate({
        nombre: req.body.nombre 
     }, update, {
         new: true
@@ -96,7 +97,7 @@ module.exports.restock = (req,res,next) => {
 }
 
 module.exports.deleteProduct = (req,res,next) => {
-    Product.findOneAndDelete({nombre: req.body.nombre})
+    Producto.findOneAndDelete({nombre: req.body.nombre})
     .then((data) => {
         if(data)
             res.status(200).json(data);
@@ -105,4 +106,50 @@ module.exports.deleteProduct = (req,res,next) => {
     }).catch(err => {
         next(err);
     })
+}
+
+module.exports.update = (req, res, next) => {
+    debug("Update Producto", {
+        nombre: req.body.nombre,
+        precio: req.body.precio,
+        cantidad: req.body.cantidad,
+        tiempo_entrega: req.body.tiempo_entrega,
+        descripcion: req.body.descripcion,
+        imagen_url: req.body.imagen_url
+    });
+
+    var elparams = req.params.nombre
+    Producto.findOne({nombre : elparams})
+        .then((miproducto) => {
+            console.log(miproducto);
+            res.render('actualizarproductoform', {title: 'Index', mivariable: miproducto});
+        }).catch(err => {
+            next(err);
+        })
+}
+
+module.exports.update2 = (req,res, next) => {
+    
+    let update = {
+        nombre: req.body.nombre,
+        precio: req.body.precio,
+        cantidad: req.body.cantidad,
+        tiempo_entrega: req.body.tiempo_entrega,
+        descripcion: req.body.descripcion,
+        imagen_url: req.body.imagen_url
+    };
+
+    Producto.findOneAndUpdate({
+            nombre: update.nombre
+        }, update, {
+            new: true
+        })
+        .then((updated) => {
+            if (updated)
+                res.redirect('/')
+            else
+                return res.status(400).json(null);
+        }).catch(err => {
+            next(err);
+        });
 }

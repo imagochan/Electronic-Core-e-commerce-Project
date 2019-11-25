@@ -6,7 +6,8 @@ var schema =  new Schema({
     precio: Number,
     cantidad: Number,
     tiempo_entrega: Number,
-    descripcion: String
+    descripcion: String,
+    imagen_url: String
 });
 
 module.exports = mongoose.model('Producto',schema);
