@@ -10,7 +10,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
 var userRouter = require('./routes/user');
-var principalRouter = require('./routes/products');
+var productRouter = require('./routes/products');
 var reciboRouter = require('./routes/recibo');
 
 const mongoose = require('mongoose');
@@ -46,7 +46,7 @@ app.use('/index', indexRouter);
 app.use('/', loginRouter);
 app.use('/login/signup', signupRouter);
 app.use('/user', userRouter);
-app.use('/principal', principalRouter);
+app.use('/product', productRouter);
 app.use('/recibo', reciboRouter);
 
 // catch 404 and forward to error handler

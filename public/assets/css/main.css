@@ -78,6 +78,7 @@ input, select, textarea {
 
 .hiddenInput{
 	visibility: hidden;
+	display: none;
 }
 
 /* Basic */

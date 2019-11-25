@@ -8,14 +8,14 @@ div(id="main")
                 article(class="style1")
                     span(class="image")
                         img(src="images/pic01.jpg", alt="")
-                    a
+                    a(href="product")
                         h2= producto.nombre
                         div(class="content")
                             p= `Precio: ${producto.precio}`
                             p= producto.descripcion
-                            form(action="", method="post")
+//                            form(action="", method="post")
+                                input(type="submit", value="Comprar")
                                 input(class="hiddenInput", type="text", name="idProducto", value=`${producto._id}`)
                                 input(class="hiddenInput", type="text", name="nombreProducto", value=`${producto.nombre}`)
                                 input(class="hiddenInput", type="text", name="idUsuario", value=`${usuario._id}`)
                                 input(class="hiddenInput", type="text", name="nombreUsuario", value=`${usuario.nombre}`)
-                                input(type="button", value="Comprar")
