@@ -37,12 +37,27 @@ module.exports.LoadIndex = async (req,res,next) => {
         })
 }
 
-module.exports.Comprar = (req,res,next) => {
-    var user = req.params.username;
-    var producto = req.params.nombre;
-
-    console.log("User " + user);
-    console.log("Producto " + producto);
+module.exports.Comprar = async (req,res,next) => {
+    var userLogged;
     
+    await User.findOne({
+        username: req.params.username,
+    })
+    .then((foundUser)=>{
+        if(foundUser){
+            userLogged = foundUser;
+        }
+        else
+            res.redirect('/');
+    });
+
+    await Producto.findOne({
+        nombre: req.params.nombre
+    })
+    .then((product)=>{
+        res.render('product', {title: 'Index', usuario: userLogged, productos: product});
+    });
+
+
 }
 
