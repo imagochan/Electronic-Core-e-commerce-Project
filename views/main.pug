@@ -8,7 +8,7 @@ div(id="main")
                 article(class="style1")
                     span(class="image")
                         img(src="images/pic01.jpg", alt="")
-                    a(href=`comprar/${usuario.username}/${producto.nombre}`)
+                    a(href=`/index/${usuario.username}/${producto.nombre}`)
                         h2= producto.nombre
                         div(class="content")
                             p= `Precio: ${producto.precio}`

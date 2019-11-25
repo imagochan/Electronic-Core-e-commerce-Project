@@ -9,4 +9,9 @@ router.get('/', function(req, res, next) {
 //  res.render('index', { title: 'Express' });
 });
 
+router.get('/:username/:nombre', function(req,res,next){
+  console.log("Hola");
+  usuarioProductoController.Comprar(req,res,next);
+});
+
 module.exports = router;

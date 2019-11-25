@@ -30,12 +30,19 @@ module.exports.LoadIndex = async (req,res,next) => {
         .skip(perPage * page)
         .sort({ [sortProperty]: sort})
         .then((product) => {
-            console.log(usuarioLogged);
-            console.log(product);
             res.render('index', {title: 'Index', usuario: usuarioLogged, productos: product});
 //           return res.status(200).json(product)
         }).catch(err => {
             next(err);
         })
+}
+
+module.exports.Comprar = (req,res,next) => {
+    var user = req.params.username;
+    var producto = req.params.nombre;
+
+    console.log("User " + user);
+    console.log("Producto " + producto);
+    
 }
 
