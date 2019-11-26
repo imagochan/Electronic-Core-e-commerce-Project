@@ -1,4 +1,5 @@
 const Recibo = require('../../models/Recibo');
+const User = require('../../models/Usuario');
 var debug = require('debug')('proyectoWeb:user_controller');
 
 module.exports.getOne = (req, res, next) => {
@@ -20,10 +21,38 @@ module.exports.getOne = (req, res, next) => {
         })
 }
 
-module.exports.makeRecibo = (req, res, next) => {
+module.exports.makeRecibo = async (req, res, next) => {
     console.log("user: " + req.body.username);
     debug("Recibo", { body: req.body });
-    Recibo.findOne({
+
+    var myusername = req.body.username;
+    var myuser;
+    await User.findOne({"username":myusername}).then((foundUser) => {
+        console.log(foundUser._id)
+        myuser = foundUser;
+    })
+    console.log("hola mundo");
+    console.log(myuser._id);
+    console.log("hola mundo2");
+
+    var myrecibosusuario;
+    var productos;
+
+    await Recibo.find({"UsuarioId":myuser._id}).then((recibosUsuario) => {
+        console.log(recibosUsuario._id);
+        console.log("despues de recibofindawait");
+        myrecibosusuario = recibosUsuario;
+    })
+    
+    console.log(myrecibosusuario.countDocuments);
+
+    for(let i = 0; myrecibosusuario.countDocuments; i++){
+        await Producto.findOne({"_id":reciboUsuario[i].ProductoId}).then((foundProduct) => {
+            console.log(foundProduct[i].nombre);
+        })
+    }
+
+    await Recibo.findOne({
         _id: req.body._id
     })
         .then((foundRecibo) => {
@@ -44,9 +73,12 @@ module.exports.makeRecibo = (req, res, next) => {
             }
         }).then(recibo => {
             console.log("made recibo");
+
             return res
+                .header('Location', '/index/ordenes' + req.body.username)
                 .status(201)
-                .json("success");
+                .render('mainordenes', {usuario: myuser, productos: product});
+            //res.redirect(`/index/ordenes/${req.body.username}`);
         }).catch(err => {
             next(err);
         })

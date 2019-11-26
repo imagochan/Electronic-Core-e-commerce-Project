@@ -18,4 +18,8 @@ router.post('/ordenes', function(req,res,next){
   reciboController.makeRecibo(req,res,next);
 });
 
+router.get('/ordenes/:username', function(req,res,next){
+  usuarioProductoController.LoadIndexRecibo(req,res,next);
+});
+
 module.exports = router;
