@@ -21,6 +21,7 @@ module.exports.getOne = (req, res, next) => {
 }
 
 module.exports.makeRecibo = (req, res, next) => {
+    console.log("user: " + req.body.username);
     debug("Recibo", { body: req.body });
     Recibo.findOne({
         _id: req.body._id
@@ -34,9 +35,9 @@ module.exports.makeRecibo = (req, res, next) => {
                 var d = new Date();
                 let newRecibo = new Recibo({
                     productoId: req.body.productoId,
-                    productoNombre: req.body.productoNombre,
+                    productoNombre: req.body.nombre,
                     usuarioId: req.body.usuarioId,
-                    usuarioNombre: req.body.usuarioNombre,
+                    usuarioNombre: req.body.username,
                     fechaCompra: Date()
                 });
                 return newRecibo.save();
@@ -44,12 +45,9 @@ module.exports.makeRecibo = (req, res, next) => {
         }).then(recibo => {
             console.log("made recibo");
             return res
-                .header('Location', '/recibo/' + recibo._id)
                 .status(201)
                 .json("success");
         }).catch(err => {
             next(err);
         })
 }
-
-

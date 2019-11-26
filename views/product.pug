@@ -1,16 +1,23 @@
-div(id=producto)
-    form(action="" , method="post")
-        img(src="", alt="")
-        h1= producto.nombre
-        h2= producto.precio
-        img(src="producto.imagen_url", alt="Foto del producto")
-        p= producto.descripcion
-        p Tiempo de entrega esperado:
-        label=producto.tiempo_entrega
-        br
-        label Stock:
-        label= producto.cantidad
-        br
-        input(type="submit", value="Ordenar")
-        br
-        input(type="submit", formaction="/index")
+extends layout
+
+block content
+    div(id=producto)
+        form(action="" , method="post")
+            img(src="", alt="")
+            h1= producto.nombre
+            h2= producto.precio
+            img(src="producto.imagen_url", alt="Foto del producto")
+            p= producto.descripcion
+            p Tiempo de entrega esperado:
+            label=producto.tiempo_entrega
+            br
+            label Stock:
+            label= producto.cantidad
+            br
+            input(type="text", name="usuarioId", class="hiddenInput", value=usuario._id)
+            input(type="text", name="username", class="hiddenInput", value=usuario.username)
+            input(type="text", name="productoId", class="hiddenInput", value=producto._id)
+            input(type="text", name="nombre", class="hiddenInput", value=producto.nombre)
+            input(type="submit", value="Ordenar", formaction="/index/ordenes")
+            br
+            input(type="submit", formaction="/index")

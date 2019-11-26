@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var reciboController = require('../controller/api/reciboController');
 var productController = require("../controller/api/productController");
 var usuarioProductoController = require('../controller/api/userProductoController');
 
@@ -10,8 +11,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:username/:nombre', function(req,res,next){
-  console.log("Hola");
   usuarioProductoController.Comprar(req,res,next);
+});
+
+router.post('/ordenes', function(req,res,next){
+  reciboController.makeRecibo(req,res,next);
 });
 
 module.exports = router;
