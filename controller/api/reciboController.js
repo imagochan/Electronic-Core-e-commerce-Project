@@ -91,3 +91,41 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
     console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
+
+module.exports.getRecibosFromMenu = async (req,res,next) => {
+//    console.log(req.params.username);
+    var myusername = req.params.username;
+    console.log(myusername);
+    var myuser;
+
+    await User.findOne({ username: myusername }, "-password")
+        .then((foundUser) => {
+            console.log(foundUser);
+            myuser = foundUser;
+        })
+    console.log("hola mundo");
+    console.log(myuser);
+    console.log("hola mundo2");
+
+    var myrecibosusuario;
+    var productos = [];
+    await Recibo.find({ usuarioId: myuser._id })
+    .then((recibosUsuario) => {
+        console.log("despues de recibofindawait");
+        myrecibosusuario = recibosUsuario;
+    })
+    console.log(myrecibosusuario.length);
+    var cantRecibos = myrecibosusuario.length;
+    var Recibos = myrecibosusuario;
+    for (let i = 0; i < cantRecibos; i++) {
+        await Producto.findOne({ _id: Recibos[i].productoId })
+            .then((foundProduct) => {
+                productos[i] = foundProduct;
+                console.log("Producto");
+//                console.log(productos[i]);
+            })
+    }
+    console.log(productos);
+    return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
+}
+

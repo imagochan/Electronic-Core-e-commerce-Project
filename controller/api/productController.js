@@ -31,7 +31,7 @@ module.exports.getProducts = (req,res,next) => {
         .skip(perPage * page)
         .sort({ [sortProperty]: sort})
         .then((product) => {
-           return res.status(200).json(product)
+            return res.status(200).json(product)
         }).catch(err => {
             next(err);
         })
