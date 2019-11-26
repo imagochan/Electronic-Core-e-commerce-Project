@@ -1,5 +1,6 @@
 const Recibo = require('../../models/Recibo');
 const User = require('../../models/Usuario');
+const Producto = require('../../models/Producto');
 var debug = require('debug')('proyectoWeb:user_controller');
 
 module.exports.getOne = (req, res, next) => {
@@ -25,32 +26,6 @@ module.exports.makeRecibo = async (req, res, next) => {
     console.log("user: " + req.body.username);
     debug("Recibo", { body: req.body });
 
-    var myusername = req.body.username;
-    var myuser;
-    await User.findOne({"username":myusername}).then((foundUser) => {
-        console.log(foundUser._id)
-        myuser = foundUser;
-    })
-    console.log("hola mundo");
-    console.log(myuser._id);
-    console.log("hola mundo2");
-
-    var myrecibosusuario;
-    var productos;
-
-    await Recibo.find({"UsuarioId":myuser._id}).then((recibosUsuario) => {
-        console.log(recibosUsuario._id);
-        console.log("despues de recibofindawait");
-        myrecibosusuario = recibosUsuario;
-    })
-    
-    console.log(myrecibosusuario.countDocuments);
-
-    for(let i = 0; myrecibosusuario.countDocuments; i++){
-        await Producto.findOne({"_id":reciboUsuario[i].ProductoId}).then((foundProduct) => {
-            console.log(foundProduct[i].nombre);
-        })
-    }
 
     await Recibo.findOne({
         _id: req.body._id
@@ -73,13 +48,46 @@ module.exports.makeRecibo = async (req, res, next) => {
             }
         }).then(recibo => {
             console.log("made recibo");
-
             return res
                 .header('Location', '/index/ordenes' + req.body.username)
                 .status(201)
-                .render('mainordenes', {usuario: myuser, productos: product});
+//                .render('mainordenes', { usuario: myuser, productos: product });
             //res.redirect(`/index/ordenes/${req.body.username}`);
         }).catch(err => {
             next(err);
         })
+}
+
+module.exports.getRecibosFromUsuario = async (req,res,next) => {
+    var myusername = req.body.username;
+    var myuser;
+    await User.findOne({ username: myusername }, "-password")
+        .then((foundUser) => {
+            console.log(foundUser._id)
+            myuser = foundUser;
+        })
+    console.log("hola mundo");
+    console.log(myuser);
+    console.log("hola mundo2");
+
+    var myrecibosusuario;
+    var productos = [];
+    await Recibo.find({ usuarioId: myuser._id })
+    .then((recibosUsuario) => {
+        console.log("despues de recibofindawait");
+        myrecibosusuario = recibosUsuario;
+    })
+    console.log(myrecibosusuario.length);
+    var cantRecibos = myrecibosusuario.length;
+    var Recibos = myrecibosusuario;
+    for (let i = 0; i < cantRecibos; i++) {
+        await Producto.findOne({ _id: Recibos[i].productoId })
+            .then((foundProduct) => {
+                productos[i] = foundProduct;
+                console.log("Producto");
+//                console.log(productos[i]);
+            })
+    }
+    console.log(productos);
+    return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }

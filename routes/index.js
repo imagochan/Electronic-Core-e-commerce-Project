@@ -15,10 +15,18 @@ router.get('/:username/:nombre', function(req,res,next){
 });
 
 router.post('/ordenes', function(req,res,next){
-  reciboController.makeRecibo(req,res,next);
+//  reciboController.makeRecibo(req,res,next);
+  console.log("Recibo was made");
+  reciboController.getRecibosFromUsuario(req,res,next);
 });
 
 router.get('/ordenes/:username', function(req,res,next){
+  console.log("getRecibosFromUsuario");
+  reciboController.getRecibosFromUsuario(req,res,next);
+})
+
+router.get('/ordenes/:username', function(req,res,next){
+  console.log("LoadIndexRecibo");
   usuarioProductoController.LoadIndexRecibo(req,res,next);
 });
 
