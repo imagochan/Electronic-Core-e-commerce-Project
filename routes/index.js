@@ -15,8 +15,7 @@ router.get('/:username/:nombre', function(req,res,next){
 });
 
 router.post('/ordenes', function(req,res,next){
-//  reciboController.makeRecibo(req,res,next);
-  console.log("Recibo was made");
+  reciboController.makeRecibo(req,res,next);
   reciboController.getRecibosFromUsuario(req,res,next);
 });
 
