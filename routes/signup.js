@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req,res,next) {
   userController.register(req,res,next);
-  res.render('login', {title: 'Express'});
+  res.redirect('/');
+//  res.render('login', {title: 'Express'});
 })
 
 module.exports = router;
