@@ -5,11 +5,11 @@ block content
         form(action="" , method="post")
             img(src="", alt="")
             h1= producto.nombre
-            h2= producto.precio
-            img(src=producto.imagen_url, alt="Foto del producto")
+            h2= `$${producto.precio}`
+            img(src=producto.imagen_url, alt="Foto del producto", class="imageProducto")
             p= producto.descripcion
             p Tiempo de entrega esperado:
-            label=producto.tiempo_entrega
+            p= `${producto.tiempo_entrega}`
             br
             label Stock:
             label= producto.cantidad

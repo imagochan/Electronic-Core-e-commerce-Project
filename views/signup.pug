@@ -1,25 +1,28 @@
-h1 Sign up
-form(action="" , method="post")
-    label Nombres:
-    input(id="NomU" type="text", name="nombre", required)
-    br
-    label Apellidos:
-    input(id="LastU" type="text", name="apellido", required )
-    br
-    label Username
-    input(id="username" type="text", name="username", required, placeholder="user123" )
-    p Usuario ya existe, pruebe con otro otra vez.
-    br
-    label Password
-    input(type="password", name="password", required, placeholder="Password" )
-    br
-    label Direccion:
-    input(id="Dic" type="text", name="direccion", required, placeholder="Calle*** casa***" )
-    br
-    label Telefono:
-    input(id="TelU" type="text", name="telefono", required)
-    br 
-    label Tarjeta de credito:
-    input(id="Tarjeta" type="text", name="numero_tarjeta_credito", required, placeholder="1234********" )
-    br
-    input(id="login_btn" type="submit" value="signup" formaction="/login/signup")
+extends layout
+
+block content
+    h1 Sign up
+    form(action="" , method="post")
+        label Nombres:
+        input(id="NomU" type="text", name="nombre", required)
+        br
+        label Apellidos:
+        input(id="LastU" type="text", name="apellido", required )
+        br
+        label Username
+        input(id="username" type="text", name="username", required, placeholder="user123" )
+        p(class="hiddenInput") Usuario ya existe, pruebe con otro otra vez.
+        br
+        label Password
+        input(type="password", name="password", required, placeholder="Password" )
+        br
+        label Direccion:
+        input(id="Dic" type="text", name="direccion", required, placeholder="Calle*** casa***" )
+        br
+        label Telefono:
+        input(id="TelU" type="text", name="telefono", required)
+        br 
+        label Tarjeta de credito:
+        input(id="Tarjeta" type="text", name="numero_tarjeta_credito", required, placeholder="1234********" )
+        br
+        input(id="login_btn" type="submit" value="signup" formaction="/login/signup")

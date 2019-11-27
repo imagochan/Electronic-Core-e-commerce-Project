@@ -18,18 +18,18 @@ module.exports.getOneProduct = (req,res,next) => {
 }
 
 module.exports.getProducts = (req,res,next) => {
-    var perPage = Number(req.query.size) || 10,
+/*    var perPage = Number(req.query.size) || 10,
         page = req.query.page > 0 ? req.query.page : 0;
 
     var sortProperty = req.query.sortby || "createdAt",
-        sort = req.query.sort || "desc";
+        sort = req.query.sort || "desc";*/
 
     debug("Usert List",{size:perPage,page, sortby:sortProperty,sort});
 
     Producto.find({})
-        .limit(perPage)
+/*        .limit(perPage)
         .skip(perPage * page)
-        .sort({ [sortProperty]: sort})
+        .sort({ [sortProperty]: sort})*/
         .then((product) => {
             return res.status(200).json(product)
         }).catch(err => {
