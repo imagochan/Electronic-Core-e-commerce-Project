@@ -1,7 +1,7 @@
 div(id="main")
     div(class="inner")
         header
-            h1= `Welcome ${usuario.username} to Electronic core`
+            h1= `Welcome ${usuario.nombre} to Electronic core`
             p This is the site to use for ordering electronic devices and appliances for purchase and delivery. As a client you have access to all of the following products.
         section(class="tiles" id="section")
             each producto in productos
@@ -13,9 +13,3 @@ div(id="main")
                         div(class="content")
                             p= `Precio: ${producto.precio}`
                             p= producto.descripcion
-//                            form(action="", method="post")
-                                input(type="submit", value="Comprar")
-                                input(class="hiddenInput", type="text", name="idProducto", value=`${producto._id}`)
-                                input(class="hiddenInput", type="text", name="nombreProducto", value=`${producto.nombre}`)
-                                input(class="hiddenInput", type="text", name="idUsuario", value=`${usuario._id}`)
-                                input(class="hiddenInput", type="text", name="nombreUsuario", value=`${usuario.nombre}`)
