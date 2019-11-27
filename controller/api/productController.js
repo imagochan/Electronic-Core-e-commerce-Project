@@ -97,10 +97,10 @@ module.exports.restock = (req,res,next) => {
 }
 
 module.exports.deleteProduct = (req,res,next) => {
-    Producto.findOneAndDelete({nombre: req.body.nombre})
+    Producto.findOneAndDelete({nombre: req.params.nombre})
     .then((data) => {
         if(data)
-            res.status(200).json(data);
+            res.redirect('/');
         else
             res.status(400).json(error);
     }).catch(err => {
