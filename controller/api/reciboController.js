@@ -115,14 +115,14 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
                 productos[i] = foundProduct;
             })
     }
-    console.log(productos);
+//    console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
 
 module.exports.getRecibosFromMenu = async (req,res,next) => {
-//    console.log(req.params.username);
+    console.log(req.params.username);
     var myusername = req.params.username;
-    console.log(myusername);
+    console.log("myusername " + myusername);
     var myuser;
 
     await User.findOne({ username: myusername }, "-password")
@@ -148,7 +148,6 @@ module.exports.getRecibosFromMenu = async (req,res,next) => {
         await Producto.findOne({ _id: Recibos[i].productoId })
             .then((foundProduct) => {
                 productos[i] = foundProduct;
-                console.log("Producto");
             })
     }
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})

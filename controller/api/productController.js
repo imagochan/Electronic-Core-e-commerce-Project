@@ -1,4 +1,5 @@
 const Producto = require('../../models/Producto');
+const Recibo = require('../../models/Recibo');
 var debug = require('debug')('proyectoWeb:user_controller');
 
 module.exports.getOneProduct = (req,res,next) => {
@@ -60,9 +61,7 @@ module.exports.addProduct = (req,res,next) => {
         return res
             .header('Location', '/producto/' + producto._id)
             .status(201)
-            .json({
-                nombre: producto.nombre
-            });
+            .redirect('/');
     }).catch(err => {
         next(err);
     });
@@ -97,12 +96,18 @@ module.exports.restock = (req,res,next) => {
 }
 
 module.exports.deleteProduct = (req,res,next) => {
-    Producto.findOneAndDelete({nombre: req.params.nombre})
+    console.log("username " + req.params.username);
+    console.log("nombre " + req.params.nombre);
+    Recibo.findByIdAndDelete({
+        productoNombre: req.params.username
+    });
+
+    Producto.findOneAndDelete({nombre: req.params.username})
     .then((data) => {
         if(data)
             res.redirect('/');
         else
-            res.status(400).json(error);
+            res.status(400).json('error');
     }).catch(err => {
         next(err);
     })
