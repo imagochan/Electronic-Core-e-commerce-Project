@@ -19,9 +19,8 @@ block content
             input(type="text", name="productoId", class="hiddenInput", value=producto._id)
             input(type="text", name="nombre", class="hiddenInput", value=producto.nombre)
             input(type="submit", value="Ordenar", formaction="/index/ordenes")
-            br
-            input(type="submit", value="Regresar Menu" formaction="/index")
-            br
-            input(type="submit", value="Actualizar Producto" formaction=`/producto/update/${producto.nombre}`)
-            br
-            input(type="submit", value="Borrar Producto" formaction=`/producto/delete/${producto.nombre}`)
+            if admin
+                br
+                input(type="submit", value="Actualizar Producto" formaction=`/producto/update/${producto.nombre}`)
+                br
+                input(type="submit", value="Borrar Producto" formaction=`/producto/delete/${producto.nombre}`)
