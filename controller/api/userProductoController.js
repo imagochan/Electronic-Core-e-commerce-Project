@@ -5,7 +5,7 @@ const Admin = require('../../models/Admin');
 var debug = require('debug')('proyectoWeb:user_product_controller');
 
 module.exports.LoadIndex = async (req,res,next) => {
-    var usuarioLogged;
+    var usuarioLogged = "";
     var admin = false;
     var productos = [];
     await User.findOne({
@@ -16,35 +16,28 @@ module.exports.LoadIndex = async (req,res,next) => {
         if(foundUser){
             usuarioLogged = foundUser;
         }
-        else
+        else{
             Admin.findOne({
                 username: req.body.username,
                 password: req.body.password
             })
             .then((foundAdmin) => {
-                if(foundAdmin){
+                if(foundAdmin != undefined){
                     usuarioLogged = foundAdmin;
                     admin = true;
                 }else{
                     res.redirect('/');
                 }
             })
+        }
     });
-
-/*    var perPage = Number(req.query.size) || 10,
-        page = req.query.page > 0 ? req.query.page : 0;
-
-    var sortProperty = req.query.sortby || "createdAt",
-        sort = req.query.sort || "desc";*/
-
-//    debug("Usert List",{size:perPage,page, sortby:sortProperty,sort});
 
     await Producto.find({})
 /*        .limit(perPage)
         .skip(perPage * page)
         .sort({ [sortProperty]: sort})*/
         .then((product) => {
-            res.render('index', {title: 'ElectronicCore', usuario: usuarioLogged, productos: product, admin: admin});
+                res.render('index', {title: 'ElectronicCore', usuario: usuarioLogged, productos: product, admin: admin});
 //           return res.status(200).json(product)
         }).catch(err => {
             next(err);

@@ -47,6 +47,13 @@ module.exports.makeRecibo = async (req, res, next) => {
                     .then((foundProduct) => {
                         if(foundProduct.cantidad != 0){
                             foundProduct.cantidad--;
+                            Producto.findOneAndUpdate({
+                                nombre: foundProduct.nombre
+                            },foundProduct,{
+                                new: true
+                            }).then(()=>{
+                                console.log("updated");
+                            })
                             return newRecibo.save();
                         }else{
                             throw new Error("Producto sin existencias");
