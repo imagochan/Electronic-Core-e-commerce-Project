@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var reciboController = require('../controller/api/reciboController');
-var productController = require("../controller/api/productController");
 var usuarioProductoController = require('../controller/api/userProductoController');
 
 /* GET home page. */
@@ -14,14 +13,17 @@ router.get('/:username/:nombre', function(req,res,next){
   usuarioProductoController.Comprar(req,res,next);
 });
 
-router.post('/ordenes', function(req,res,next){
-  reciboController.makeRecibo(req,res,next);
-  reciboController.getRecibosFromUsuario(req,res,next);
+router.post('/ordenes', async function(req,res,next){
+  console.log("Making recibo");
+  await reciboController.makeRecibo(req,res,next)
+  .then((returned) => {
+    reciboController.getRecibosFromUsuario(req,res,next);
+  });
 });
 
 router.get('/ordenes/:username', function(req,res,next){
   console.log("getRecibosFromUsuario");
-  reciboController.getRecibosFromUsuario(req,res,next);
+  reciboController.getRecibosFromMenu(req,res,next);
 })
 
 router.get('/ordenes/:username', function(req,res,next){

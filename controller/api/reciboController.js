@@ -23,7 +23,6 @@ module.exports.getOne = (req, res, next) => {
 }
 
 module.exports.makeRecibo = async (req, res, next) => {
-    console.log("user: " + req.body.username);
     debug("Recibo", { body: req.body });
 
 
@@ -44,15 +43,24 @@ module.exports.makeRecibo = async (req, res, next) => {
                     usuarioNombre: req.body.username,
                     fechaCompra: Date()
                 });
-                return newRecibo.save();
+                Producto.findOne({ _id: newRecibo.productoId })
+                    .then((foundProduct) => {
+                        if(foundProduct.cantidad != 0){
+                            foundProduct.cantidad--;
+                            return newRecibo.save();
+                        }else{
+                            throw new Error("Producto sin existencias");
+                        }
+                    })
             }
         }).then(recibo => {
             console.log("made recibo");
-            return res
-                .header('Location', '/index/ordenes' + req.body.username)
-                .status(201)
+            return 1;
+//            res
+//                .header('Location', '/index/ordenes/' + req.body.username)
+//                .status(201)
 //                .render('mainordenes', { usuario: myuser, productos: product });
-            //res.redirect(`/index/ordenes/${req.body.username}`);
+//            .redirect(`/index/ordenes/${req.body.username}`);
         }).catch(err => {
             next(err);
         })
@@ -63,32 +71,24 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
     var myuser;
     await User.findOne({ username: myusername }, "-password")
         .then((foundUser) => {
-            console.log(foundUser._id)
             myuser = foundUser;
         })
-    console.log("hola mundo");
-    console.log(myuser);
-    console.log("hola mundo2");
 
     var myrecibosusuario;
     var productos = [];
     await Recibo.find({ usuarioId: myuser._id })
     .then((recibosUsuario) => {
-        console.log("despues de recibofindawait");
         myrecibosusuario = recibosUsuario;
     })
-    console.log(myrecibosusuario.length);
+
     var cantRecibos = myrecibosusuario.length;
     var Recibos = myrecibosusuario;
     for (let i = 0; i < cantRecibos; i++) {
         await Producto.findOne({ _id: Recibos[i].productoId })
             .then((foundProduct) => {
                 productos[i] = foundProduct;
-                console.log("Producto");
-//                console.log(productos[i]);
             })
     }
-    console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
 
@@ -122,10 +122,8 @@ module.exports.getRecibosFromMenu = async (req,res,next) => {
             .then((foundProduct) => {
                 productos[i] = foundProduct;
                 console.log("Producto");
-//                console.log(productos[i]);
             })
     }
-    console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
 
