@@ -122,7 +122,7 @@ module.exports.update = (req, res, next) => {
     Producto.findOne({nombre : elparams})
         .then((miproducto) => {
             console.log(miproducto);
-            res.render('actualizarproductoform', {title: 'Index', mivariable: miproducto});
+            res.render('actualizarproductoform', {title: 'ElectronicCore', mivariable: miproducto});
         }).catch(err => {
             next(err);
         })

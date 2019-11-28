@@ -80,6 +80,26 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
             myuser = foundUser;
         })
 
+/*    await User.findOne({
+        username: myusername,
+    }, "-password")
+    .then((foundUser)=>{
+        if(foundUser){
+            myuser = foundUser;
+        }
+        else{
+            Admin.findOne({
+                username: myusername,
+            },"-password")
+            .then((foundAdmin) => {
+                if(foundAdmin != undefined){
+                    myuser = foundAdmin;
+                    admin = true;
+                }
+            })
+        }
+    });*/
+
     var myrecibosusuario;
     var productos = [];
     await Recibo.find({ usuarioId: myuser._id })
