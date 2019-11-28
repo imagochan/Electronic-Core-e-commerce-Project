@@ -19,12 +19,13 @@ block content
             input(type="text", name="productoId", class="hiddenInput", value=producto._id)
             input(type="text", name="nombre", class="hiddenInput", value=producto.nombre)
             input(type="submit", value="Ordenar", formaction="/index/ordenes")
-        form(action="", method="get")
-            input(type="text", name="usuarioId", class="hiddenInput", value=usuario._id)
-            input(type="text", name="username", class="hiddenInput", value=usuario.username)
-            input(type="text", name="productoId", class="hiddenInput", value=producto._id)
-            input(type="text", name="nombre", class="hiddenInput", value=producto.nombre)
-            br
-            input(type="submit", value="Actualizar Producto" formaction=`/producto/update/${producto.nombre}`)
-            br
-            input(type="submit", value="Borrar Producto" formaction=`/producto/delete/${usuario.username}/${producto.nombre}`)
+        if usuario.username == 'adminelectronic'
+            form(action="", method="get")
+                input(type="text", name="usuarioId", class="hiddenInput", value=usuario._id)
+                input(type="text", name="username", class="hiddenInput", value=usuario.username)
+                input(type="text", name="productoId", class="hiddenInput", value=producto._id)
+                input(type="text", name="nombre", class="hiddenInput", value=producto.nombre)
+                br
+                input(type="submit", value="Actualizar Producto" formaction=`/producto/update/${producto.nombre}`)
+                br
+                input(type="submit", value="Borrar Producto" formaction=`/producto/delete/${usuario.username}/${producto.nombre}`)

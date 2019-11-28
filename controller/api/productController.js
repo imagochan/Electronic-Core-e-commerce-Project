@@ -96,11 +96,24 @@ module.exports.restock = (req,res,next) => {
 }
 
 module.exports.deleteProduct = (req,res,next) => {
+    //Por cuestiones de orden el parametro username y nombre estan cambiados
     console.log("username " + req.params.username);
     console.log("nombre " + req.params.nombre);
-    Recibo.findByIdAndDelete({
+/*
+    let amountRecibos=[];
+
+    Recibo.find({
         productoNombre: req.params.username
-    });
+    })
+    .then((found)=> {
+        amountRecibos = found;
+    })
+
+    for(let i = 0; i < amountRecibos.lenght; i++){
+        Recibo.findOneAndDelete({
+            productoNombre: req.params.username
+        });
+    }*/
 
     Producto.findOneAndDelete({nombre: req.params.username})
     .then((data) => {

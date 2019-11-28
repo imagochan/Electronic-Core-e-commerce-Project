@@ -16,21 +16,10 @@ module.exports.LoadIndex = async (req,res,next) => {
     .then((foundUser)=>{
         if(foundUser){
             usuarioLogged = foundUser;
+            if(req.body.username == 'adminelectronic')
+                admin = true;
         }
         else{
-            /*Admin.findOne({
-                username: req.body.username,
-                password: req.body.password
-            })
-            .then((foundAdmin) => {
-                if(foundAdmin != undefined){
-                    console.log("soy el 2");
-                    usuarioLogged = foundAdmin;
-                    admin = true;
-                }else{
-                    res.redirect('/');
-                }
-            })*/
             res.redirect('/');
         }
     });

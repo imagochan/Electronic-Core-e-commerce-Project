@@ -3,4 +3,5 @@ nav#menu
     ul
         li: a(href="/") Home
         li: a(href=`/ordenes/${usuario.username}`) Mis Ordenes
-        li: a(href="/producto/nuevoproducto") Agregar Nuevo Producto
+        if admin
+            li: a(href="/producto/nuevoproducto") Agregar Nuevo Producto
