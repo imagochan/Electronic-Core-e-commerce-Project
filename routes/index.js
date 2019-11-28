@@ -17,10 +17,12 @@ router.post('/ordenes', async function(req,res,next){
   console.log("Making recibo");
   await reciboController.makeRecibo(req,res,next)
   .then((returned) => {
+    console.log("from then " + returned);
     reciboController.getRecibosFromUsuario(req,res,next);
   });
 });
 
+/*
 router.get('/ordenes/:username', function(req,res,next){
   console.log("getRecibosFromUsuario");
   reciboController.getRecibosFromMenu(req,res,next);
@@ -29,6 +31,6 @@ router.get('/ordenes/:username', function(req,res,next){
 router.get('/ordenes/:username', function(req,res,next){
   console.log("LoadIndexRecibo");
   usuarioProductoController.LoadIndexRecibo(req,res,next);
-});
+});*/
 
 module.exports = router;

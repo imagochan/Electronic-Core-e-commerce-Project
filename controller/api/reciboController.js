@@ -25,7 +25,7 @@ module.exports.getOne = (req, res, next) => {
 module.exports.makeRecibo = async (req, res, next) => {
     debug("Recibo", { body: req.body });
 
-
+    var productos = [];
     await Recibo.findOne({
         _id: req.body._id
     })
@@ -56,10 +56,9 @@ module.exports.makeRecibo = async (req, res, next) => {
         }).then(recibo => {
             console.log("made recibo");
             return 1;
-//            res
 //                .header('Location', '/index/ordenes/' + req.body.username)
 //                .status(201)
-//                .render('mainordenes', { usuario: myuser, productos: product });
+//            .render('indexordenes', { usuario: myuser, productos: product });
 //            .redirect(`/index/ordenes/${req.body.username}`);
         }).catch(err => {
             next(err);
@@ -89,6 +88,7 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
                 productos[i] = foundProduct;
             })
     }
+    console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
 
