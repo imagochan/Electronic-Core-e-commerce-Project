@@ -5,7 +5,7 @@ const Admin = require('../../models/Admin');
 var debug = require('debug')('proyectoWeb:user_product_controller');
 
 module.exports.LoadIndex = async (req,res,next) => {
-    var usuarioLogged = "";
+    var usuarioLogged;
     var admin = false;
     var productos = [];
     await User.findOne({
@@ -14,6 +14,7 @@ module.exports.LoadIndex = async (req,res,next) => {
     })
     .then((foundUser)=>{
         if(foundUser){
+            console.log("soy el 1");
             usuarioLogged = foundUser;
         }
         else{
@@ -23,6 +24,7 @@ module.exports.LoadIndex = async (req,res,next) => {
             })
             .then((foundAdmin) => {
                 if(foundAdmin != undefined){
+                    console.log("soy el 2");
                     usuarioLogged = foundAdmin;
                     admin = true;
                 }else{
