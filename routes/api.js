@@ -2,6 +2,7 @@ const express = require("express"),
     router = express.Router(),
     userController = require("../controller/api/userController");
 
+//Rutas para pruebas desde postman
 router.get("/user/:username", userController.getId);
 router.get("/user", userController.getId);
 

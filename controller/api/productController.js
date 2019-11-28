@@ -2,6 +2,7 @@ const Producto = require('../../models/Producto');
 const Recibo = require('../../models/Recibo');
 var debug = require('debug')('proyectoWeb:user_controller');
 
+//Metodo que busca un producto en especifico para mostrarlo en la pantalla de producto
 module.exports.getOneProduct = (req,res,next) => {
     debug("Search product", req.params);
     Producto.findOne({
@@ -18,6 +19,7 @@ module.exports.getOneProduct = (req,res,next) => {
     })
 }
 
+//Metodo para postman de mostrar todos los productos
 module.exports.getProducts = (req,res,next) => {
 /*    var perPage = Number(req.query.size) || 10,
         page = req.query.page > 0 ? req.query.page : 0;
@@ -38,6 +40,7 @@ module.exports.getProducts = (req,res,next) => {
         })
 }
 
+//Metodo utilizado para agregar productos desde el menu
 module.exports.addProduct = (req,res,next) => {
     Producto.findOne({
         nombre: req.body.nombre
@@ -55,9 +58,9 @@ module.exports.addProduct = (req,res,next) => {
                 descripcion: req.body.descripcion,
                 imagen_url: req.body.imagen_url
             });
-            return newProducto.save(); // Retornamos la promesa para poder concater una sola linea de then
+            return newProducto.save();
         }
-    }).then(producto => { // Con el usario almacenado retornamos que ha sido creado con exito
+    }).then(producto => {
         return res
             .header('Location', '/producto/' + producto._id)
             .status(201)
@@ -67,6 +70,7 @@ module.exports.addProduct = (req,res,next) => {
     });
 }
 
+//simple update de producto
 module.exports.restock = (req,res,next) => {
     debug("Restock product", {
         nombre: req.body.nombre,
@@ -95,6 +99,8 @@ module.exports.restock = (req,res,next) => {
     });
 }
 
+//Metodo tentativamente usado para borrar producto, tiene un problema que despues de borrar
+//causa un problema en mostrar los recibos del usuario
 module.exports.deleteProduct = (req,res,next) => {
     //Por cuestiones de orden el parametro username y nombre estan cambiados
     console.log("username " + req.params.username);
@@ -126,16 +132,8 @@ module.exports.deleteProduct = (req,res,next) => {
     })
 }
 
+//metodo intermediario para llamar a pagina formulario con detalles para hacer update
 module.exports.update = (req, res, next) => {
-    debug("Update Producto", {
-        nombre: req.body.nombre,
-        precio: req.body.precio,
-        cantidad: req.body.cantidad,
-        tiempo_entrega: req.body.tiempo_entrega,
-        descripcion: req.body.descripcion,
-        imagen_url: req.body.imagen_url
-    });
-
     var elparams = req.params.nombre
     Producto.findOne({nombre : elparams})
         .then((miproducto) => {
@@ -146,6 +144,7 @@ module.exports.update = (req, res, next) => {
         })
 }
 
+//Metodo con logistica de hacer update de los detalles de producto
 module.exports.update2 = (req,res, next) => {
     
     let update = {

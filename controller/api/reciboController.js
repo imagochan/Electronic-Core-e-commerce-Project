@@ -3,6 +3,7 @@ const User = require('../../models/Usuario');
 const Producto = require('../../models/Producto');
 var debug = require('debug')('proyectoWeb:user_controller');
 
+//Metodo para postman de ver un solo recibo generado al comprar de compra
 module.exports.getOne = (req, res, next) => {
     debug("Search recibo", req.params);
     Recibo.findOne({
@@ -22,6 +23,7 @@ module.exports.getOne = (req, res, next) => {
         })
 }
 
+//Metodo frecuentemente ocupado que genera recibos al ordenarlos en la pagina web
 module.exports.makeRecibo = async (req, res, next) => {
     debug("Recibo", { body: req.body });
 
@@ -72,6 +74,7 @@ module.exports.makeRecibo = async (req, res, next) => {
         })
 }
 
+//Metodo para ver todos los recibos de un usuario redirigido despues de ordenar un producto
 module.exports.getRecibosFromUsuario = async (req,res,next) => {
     var myusername = req.body.username;
     var myuser;
@@ -115,10 +118,10 @@ module.exports.getRecibosFromUsuario = async (req,res,next) => {
                 productos[i] = foundProduct;
             })
     }
-//    console.log(productos);
     return res.render('indexordenes', {title: 'ElectronicCore', usuario: myuser, productos: productos})
 }
 
+//Metodo para ver todos los recibos de un usuario llamado desde el menu de la pagina principal
 module.exports.getRecibosFromMenu = async (req,res,next) => {
     console.log(req.params.username);
     var myusername = req.params.username;

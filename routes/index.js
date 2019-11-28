@@ -6,13 +6,14 @@ var usuarioProductoController = require('../controller/api/userProductoControlle
 /* GET home page. */
 router.get('/', function(req, res, next) {
   usuarioProductoController.LoadIndex(req,res,next);
-//  res.render('index', { title: 'Express' });
 });
 
+//Get para buscar informacion de comprar
 router.get('/:username/:nombre', function(req,res,next){
   usuarioProductoController.Comprar(req,res,next);
 });
 
+//Post para obtener las ordenes realizadas por el usuario
 router.post('/ordenes', async function(req,res,next){
   console.log("Making recibo");
   await reciboController.makeRecibo(req,res,next)
@@ -21,16 +22,5 @@ router.post('/ordenes', async function(req,res,next){
     reciboController.getRecibosFromUsuario(req,res,next);
   });
 });
-
-/*
-router.get('/ordenes/:username', function(req,res,next){
-  console.log("getRecibosFromUsuario");
-  reciboController.getRecibosFromMenu(req,res,next);
-})
-
-router.get('/ordenes/:username', function(req,res,next){
-  console.log("LoadIndexRecibo");
-  usuarioProductoController.LoadIndexRecibo(req,res,next);
-});*/
 
 module.exports = router;

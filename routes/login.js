@@ -8,20 +8,12 @@ router.get('/', function (req, res, next) {
   res.render('login', { title: 'ElectricCore' });
 });
 
-
+//Ruta que ejecuta controller para validar login y obtener los productos
 router.post('/',function (req, res, next) {
-  usuarioProductoController.LoadIndex(req,res,next);
-//  userController.Login(req,res,next);
-//  var foundUser = userController.Login(req,res,next);
-/*  if(foundUser){
-    res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username})
-  }else{
-    console.log("notFound");
-    res.redirect('/');
-  }*/
-  
+  usuarioProductoController.LoadIndex(req,res,next);  
 });
 
+//Ruta para redireccionar a pagina de signup
 router.post('/signup', function (req, res, next) {
   res.render('signup', {title:'ElectricCore'});
 });

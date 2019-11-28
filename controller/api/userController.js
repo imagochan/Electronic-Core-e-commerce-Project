@@ -1,6 +1,7 @@
 const User = require('../../models/Usuario');
 var debug = require('debug')('proyectoWeb:user_controller');
 
+//Metodo para postman para obtener un solo usuario
 module.exports.getOne = (req,res,next) => {
     debug("Search User", req.params);
     User.findOne({
@@ -16,27 +17,8 @@ module.exports.getOne = (req,res,next) => {
         next(err);
     })
 }
-/*
-module.exports.getAll = (req,res,next) => {
 
-    var perPage = Number(req.query.size) || 10,
-        page = req.query.page > 0 ? req.query.page : 0;
-    var sortProperty = req.query.sortby || "createdAt",
-        sort = req.query.sort || "desc";
-
-    debug("User List", {size: perPage, page, sortby:sortProperty,sort});
-
-    User.find({}, "-password -login_count -__v")
-        .limit(perPage)
-        .skip(perPage*page)
-        .sort({ [sortProperty]: sort})
-        .then((users) => {
-            return res.json(users);
-        }).catch(err=>{
-            next(err);
-        })
-}*/
-
+//Metodo usado para obtener todos los usuarios
 module.exports.getAll = (req,res,next) => {
 
     var perPage = Number(req.query.size) || 10,
@@ -57,26 +39,24 @@ module.exports.getAll = (req,res,next) => {
         })
 }
 
+//Metodo de validacion de login basico(No usado en programa ya que se necesitan tambien
+//los productos, para ello se creo otro controller)
 module.exports.Login = (req,res,next) => {
     debug("Search Username", req.params);
-//    console.log(req.body.username);
-//    console.log(req.body.password);
     User.findOne({
         username: req.body.username,
         password: req.body.password
     } , "-login_count")
     .then((foundUser)=>{
         if(foundUser){
-//            console.log(foundUser);
-//            return res.json({userId: foundUser._id, username: foundUser.username});
             res.render('index', {title: 'Express', userId: foundUser._id, username: foundUser.username});
-//            res.redirect('/index');
         }
         else
             res.redirect('/');
     });
 }
 
+//Metodo para verificar usuario logeado desde parametros
 module.exports.Logged = (req,res,next) => {
     debug("Search Username", req.params);
     console.log(req.body.username);
@@ -92,7 +72,7 @@ module.exports.Logged = (req,res,next) => {
     });
 }
 
-
+//Metodo usado en signup para agregar usuarios
 module.exports.register = (req,res,next) => {
     debug("User", {body : req.body});
     User.findOne({
@@ -128,6 +108,7 @@ module.exports.register = (req,res,next) => {
     })
 }
 
+//Metodo para postman para modificar la informacion de un usuario
 module.exports.updateUser = (req,res,next) => {
     let update = {
         username: req.params.username,
@@ -147,6 +128,7 @@ module.exports.updateUser = (req,res,next) => {
     })
 }
 
+//Metodo para postman para eliminar un usuario
 module.exports.deleteUser = (req,res,next) => {
     debug("Delete user", {
         username: req.params.username,

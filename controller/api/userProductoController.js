@@ -4,6 +4,8 @@ const Recibo = require('../../models/Recibo');
 const Admin = require('../../models/Admin');
 var debug = require('debug')('proyectoWeb:user_product_controller');
 
+//Metodo utilizado para consultas necesarias a producto y usuario para cargar pagina
+//principal
 module.exports.LoadIndex = async (req,res,next) => {
     var usuarioLogged;
     var adminLogged;
@@ -25,17 +27,14 @@ module.exports.LoadIndex = async (req,res,next) => {
     });
 
     await Producto.find({})
-/*        .limit(perPage)
-        .skip(perPage * page)
-        .sort({ [sortProperty]: sort})*/
         .then((product) => {
                 res.render('index', {title: 'ElectronicCore', usuario: usuarioLogged, productos: product, admin: admin});
-//           return res.status(200).json(product)
         }).catch(err => {
             next(err);
         })
 }
 
+//Metodo usado para simular la compra de productos
 module.exports.Comprar = async (req,res,next) => {
     var userLogged;
     var admin =  false;
@@ -71,6 +70,7 @@ module.exports.Comprar = async (req,res,next) => {
 
 }
 
+//Metodo utilizado para cargar mis ordenes
 module.exports.LoadIndexRecibo = async (req,res,next) => {
     console.log("hola soy yo");
     var myusername = req.params.username
@@ -115,17 +115,4 @@ module.exports.LoadIndexRecibo = async (req,res,next) => {
     }).catch(err => {
         next(err);
     })
-
-
-/*
-    await Producto.find({})
-        .limit(perPage)
-        .skip(perPage * page)
-        .sort({ [sortProperty]: sort})
-        .then((product) => {
-            res.render('index', {title: 'Index', usuario: usuarioLogged, productos: product});
-//           return res.status(200).json(product)
-        }).catch(err => {
-            next(err);
-        })*/
 }
